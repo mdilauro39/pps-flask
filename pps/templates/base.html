@@ -1,0 +1,33 @@
+<!-- plantilla base con barra de navegación-->
+<html>
+    <head>
+      <!-- si recibo el titulo por parametro-->
+        {% if title %}
+         <!-- la etiqueta {{ title }} se hidrata con los datos suminustrados por el renderizados-->
+        <title>{{ title }} - microblog</title>
+        <!--si no lo recibo imprimo mensaje sntandard-->
+        {% else %}
+        <title>microblog</title>
+        {% endif %}
+    </head>
+    <body>
+        <div>
+            Microblog:
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('login') }}">Login</a>
+        </div>
+        <!--brake-->
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        <!-- instrucción de control para definir el lugar donde las plantillas derivadas pueden insertarse.-->
+        {% block content %}{% endblock %}
+    </body>
+</html>
